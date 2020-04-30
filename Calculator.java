@@ -1,6 +1,6 @@
 /*
  * Calculator : Team Project Deliverable
- * The Scrum-at-Home-Order
+ * The SCRUM-at-Home Order
  * Thomas Rich, Trevor Davis, Mimi Xue
  * Jessica Lynn, Heavenly Khosa
  * CSC 131 - 02
