@@ -59,7 +59,7 @@ public class Calculator implements ActionListener {
 		}
 	} 
 
-	public static void main(String[] args) {
+	void calculate() {
 		ActionListener AL = new Calculator();
 		JFrame frm = new JFrame();
 		Container contentPane = frm.getContentPane();
