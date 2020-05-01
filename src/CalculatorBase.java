@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+import java.util.List;
 
 public class CalculatorBase implements AbstractCalculator
 {
@@ -5,12 +7,14 @@ public class CalculatorBase implements AbstractCalculator
 	private double input1;
 	private double input2;
 	private double answer;
+	private List<Operator> operators;
 		
 	public CalculatorBase()
 	{
 		input1 = 0;
 		input2 = 0;
 		answer = 0;
+		operators = new LinkedList<Operator>();
 		
 		
 	}
@@ -63,10 +67,10 @@ public class CalculatorBase implements AbstractCalculator
 	}
 
 	@Override
-	public void getOperators() 
+	public List<Operator> getOperators() 
 	{
-		// TODO Auto-generated method stub
 		
+		return operators;
 	}
 		
 	public void add()
