@@ -8,57 +8,143 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Vector;
+
 public class Calculator implements ActionListener {
-	static JTextField calcentr;
+	static JTextField display;
 	static double res = 0, opnd1= 0, opnd2 =0;
 	static boolean newNumber = true;
 	static char operator = ' ';
+	String expression;
+	
+	/*
+	 * Based on button press:
+	 *  - Displays and stores full expression 
+	 *  - Clears to 0
+	 *  - Calculates equation with PEMDAS
+	 */
 	public void actionPerformed(ActionEvent e) {
-		char c = e.getActionCommand().charAt(0);
-		switch(c) {
-			case '0':
-			case '1':
-			case '2':
-			case '3':
-			case '4':
-			case '5':
-			case '6':
-			case '7':
-			case '8':
-			case '9': if (newNumber) {calcentr.setText(""+c); newNumber = false;}
-				else calcentr.setText(calcentr.getText()+c);
-				return;
-			case '+': opnd1 = Double.parseDouble(calcentr.getText());
-				newNumber = true;
-				operator = '+';
-				return;
-			case '-': opnd1 = Double.parseDouble(calcentr.getText());
-				newNumber = true;
-				operator = '-';
-				return;
-			case '*': opnd1 = Double.parseDouble(calcentr.getText());
-				newNumber = true;
-				operator = '*';
-				return;
-			case '/': opnd1 = Double.parseDouble(calcentr.getText());
-				newNumber = true;
-				operator = '/';
-				return;
-			case '=': opnd2 = Double.parseDouble(calcentr.getText());
-				switch (operator) {
-					case '/': res = opnd1 / opnd2; break;
-					case '*': res = opnd1 * opnd2; break;
-					case '-': res = opnd1 - opnd2; break;
-					case '+': res = opnd1 + opnd2; break;
-				}
-				calcentr.setText(""+res);
-				newNumber = true;
-				return;
-			case 'C': {res = 0; newNumber = true; calcentr.setText("0.");}
-         /* Implement set percentages for quick calculation of tips, feedback for what expression has been pressed last, trig functions, clear screen (already implemented), ANS button) */
+		char buttonInput = e.getActionCommand().charAt(0);
+		
+		//Creates a new expression and prevents first input of expression from being an operator
+		if(expression == null && !isOperator(Character.toString(buttonInput)))
+		{	
+			expression = Character.toString(buttonInput);
+			display.setText(expression);
 		}
-	} 
-
+		//Displays solution to expression and prevents last input of expression from being an operator
+		else if(buttonInput == '=' && !isOperator(Character.toString(expression.charAt(expression.length() - 1))))
+		{	
+			display.setText(Double.toString(calculateSolution(expression)));
+			expression = null;
+		}
+		//Clears display
+		else if(buttonInput == 'C')
+		{
+			display.setText("0.0");
+			expression = null;
+		}
+		//prevents multiple operands in a row
+		else if((isOperator(Character.toString(buttonInput)) &&
+				!isOperator(Character.toString(expression.charAt(expression.length() - 1)))) || 
+				(buttonInput >= '0' && buttonInput <= '9'))
+		{	
+			expression += Character.toString(buttonInput);
+			display.setText(expression);
+		}
+		else
+		{
+			display.setText("ERROR");
+			//Potentially wipe expression on error
+		}
+		
+		/*Implement set percentages for quick calculation of tips,  
+		 * trig functions,  
+		 * ANS button)
+		 */
+		
+	}
+	
+	Boolean isOperator(String s)
+	{
+		if(s.charAt(0) == '+' ||
+		   s.charAt(0) == '-' ||
+		   s.charAt(0) == '*' ||
+		   s.charAt(0) == '/' ||
+		   s.charAt(0) == '=' ||
+		   s.charAt(0) == 'C')
+		{
+			return true;
+		}
+		return false;
+	}
+	
+	Double calculateSolution(String expression)
+	{
+		Vector<Double> operand = new Vector<Double>(0);
+		Vector<Character> operator = new Vector<Character>(0);
+		int temp = 0;
+		//parses expression into operands and operators with related index locations
+		for(int i = 0; i < expression.length(); i++)
+		{
+			if(expression.charAt(i) >= '0' && expression.charAt(i) <= '9')
+			{
+				if(temp == 0)
+					temp = Character.getNumericValue(expression.charAt(i));
+				else
+					temp = temp * 10 + Character.getNumericValue(expression.charAt(i));
+			}
+			else
+			{
+				operand.addElement(Double.valueOf(temp));
+				temp = 0;
+				operator.addElement(expression.charAt(i));
+			}
+		}
+		operand.addElement(Double.valueOf(temp));
+		temp = 0;
+		
+		//evaluates multiplication and division fist
+		for(int i = 0; i < operator.size(); i++)
+		{
+			if(operator.elementAt(i) == '*')
+			{
+				operand.set(i, operand.elementAt(i) * operand.elementAt(i+1));
+				operator.remove(i);
+				operand.remove(i+1);
+				i--;
+			}
+			else if(operator.elementAt(i) == '/')
+			{
+				operand.set(i, operand.elementAt(i) / operand.elementAt(i+1));
+				operator.remove(i);
+				operand.remove(i+1);
+				i--;
+			}
+		}
+		//evaluates addition and subtraction last
+		for(int i = 0; i < operator.size(); i++)
+		{
+			if(operator.elementAt(i) == '+')
+			{
+				operand.set(i, operand.elementAt(i) + operand.elementAt(i+1));
+				operator.remove(i);
+				operand.remove(i+1);
+				i--;
+			}
+			else if(operator.elementAt(i) == '-')
+			{
+				operand.set(i, operand.elementAt(i) - operand.elementAt(i+1));
+				operator.remove(i);
+				operand.remove(i+1);
+				i--;
+			}
+		}
+		
+		return operand.elementAt(0);
+		
+	}
+	
 	void calculate() {
 		ActionListener AL = new Calculator();
 		JFrame frm = new JFrame();
@@ -66,9 +152,9 @@ public class Calculator implements ActionListener {
 		contentPane.setLayout(new GridLayout(7,1,2,2));
 		JLabel calcnm = new JLabel("CSC 20 Lab 08",JLabel.CENTER);
 		frm.getContentPane().add(calcnm);
-		calcentr = new JTextField("0.");
-		calcentr.setHorizontalAlignment(JTextField.RIGHT);
-		frm.getContentPane().add(calcentr);
+		display = new JTextField("0.");
+		display.setHorizontalAlignment(JTextField.RIGHT);
+		frm.getContentPane().add(display);
 		JPanel r1 = new JPanel();								//Start row 1
 		r1.setLayout(new GridLayout(1,4,2,2));
 		frm.getContentPane().add(r1);
