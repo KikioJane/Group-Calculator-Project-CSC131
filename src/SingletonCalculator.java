@@ -9,7 +9,7 @@ public class SingletonCalculator
 	
 	private SingletonCalculator()
 	{
-		
+		// UI gets implemented here
 	}
 	
 	public static SingletonCalculator getInstance()
