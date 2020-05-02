@@ -16,6 +16,10 @@ public class CalculatorBase implements AbstractCalculator
 		answer = 0;
 		operators = new LinkedList<Operator>();
 		
+		operators.add(new Operator("+", (calc) -> {  add(); }));
+		operators.add(new Operator("-", (calc) -> {  subtract(); }));
+		operators.add(new Operator("/", (calc) -> {  divide(); }));
+		operators.add(new Operator("*", (calc) -> {  multiply(); }));
 		
 	}
 	
@@ -91,6 +95,11 @@ public class CalculatorBase implements AbstractCalculator
 	public void multiply()
 	{
 		answer = input1*input2;
+	}
+	
+	public void clear()
+	{
+		answer = 0;
 	}
 }
 
