@@ -10,4 +10,14 @@ public class Operator {
 		this.symbol = symbol;
 		this.callback = callback;
 	}
+
+	public String getSymbol() {
+		return symbol;
+	}
+
+	public Consumer<AbstractCalculator> getCallback() {
+		return callback;
+	}
+	
+	
 }
