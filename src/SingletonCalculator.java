@@ -12,7 +12,6 @@ public class SingletonCalculator
 	
 	private SingletonCalculator()
 	{
-		// ActionListener Implementation Needed
 		JTextField calcentr;
       		JFrame frm = new JFrame();
 		Container contentPane = frm.getContentPane();
