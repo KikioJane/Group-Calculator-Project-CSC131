@@ -13,6 +13,6 @@ public class CalcActionListener implements ActionListener
    
    public void actionPerformed(ActionEvent e) {
         CalculatorBase base = new CalculatorBase();
-        char c = e.getActionCommand().charAt(0);
+        char c = e.getActionCommand().charAt(0); // Needs to pass char to CalculatorBase
     }
 }
