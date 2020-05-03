@@ -1,3 +1,6 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 
 public class SingletonCalculator 
 {
@@ -24,7 +27,7 @@ public class SingletonCalculator
 		frm.getContentPane().add(r1);
 		JButton B;
 		for (int i=1; i<4; ++i)
-      {
+      		{
 			r1.add(B = new JButton(""+i));
 			// B.addActionListener(AL);
 		}
@@ -34,7 +37,7 @@ public class SingletonCalculator
 		r2.setLayout(new GridLayout(1,4,2,2));
 		frm.getContentPane().add(r2);
 		for (int i=4; i<7; ++i)
-      {
+      		{
 			r2.add(B = new JButton(""+i));
 			// B.addActionListener(AL);
 		}
@@ -44,7 +47,7 @@ public class SingletonCalculator
 		frm.getContentPane().add(r3);
 		r3.setLayout(new GridLayout(1,4,2,2));
 		for (int i=7; i<10; ++i)
-      {
+      		{
 			r3.add(B = new JButton(""+i));
 			// B.addActionListener(AL);
 		}
