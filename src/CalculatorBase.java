@@ -25,7 +25,8 @@ public class CalculatorBase implements AbstractCalculator
 	}
 	
 	
-
+//methods below are what happens when operator buttons get pressed
+	
 	public double getInput1()  // get input 1 method
 	{
 		return input1;
