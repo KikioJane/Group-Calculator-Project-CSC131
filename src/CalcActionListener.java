@@ -24,7 +24,7 @@ public class CalcActionListener implements ActionListener
         // Any numeric key just updates the textfield
         if ((c.length() == 1) && Character.isDigit(c.charAt(0)))
         {
-        	textfield.setText(Double.valueOf(textfield.getText() + c).toString());
+        	textfield.setText(textfield.getText() + c);
         }
         else
         {

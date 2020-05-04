@@ -32,7 +32,7 @@ AbstractCalculator calculator = new Trig(new CalculatorBase());
 		JLabel calcnm = new JLabel("SAHO Calculator",JLabel.CENTER);
 		frm.getContentPane().add(calcnm);
 		
-		calcentr = new JTextField("0");
+		calcentr = new JTextField("");
 		calcentr.setHorizontalAlignment(JTextField.RIGHT);
 		frm.getContentPane().add(calcentr);
 		
