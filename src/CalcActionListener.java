@@ -21,32 +21,33 @@ public class CalcActionListener implements ActionListener
         
         String c = e.getActionCommand(); // Needs to pass char to CalculatorBase
         
-        if (c.length() == 1) 
+        // Any numeric key just updates the textfield
+        if ((c.length() == 1) && Character.isDigit(c.charAt(0)))
         {
-        	// Non-alpha numeric assumes an operator of some type
-        	if (!Character.isLetterOrDigit(c.charAt(0)))
+        	textfield.setText(Double.valueOf(textfield.getText() + c).toString());
+        }
+        else
+        {
+        	// Any other key with the exception of equals sets the current textfield value as input and stores the operator
+        	if (!c.equals("="))
         	{
-        		if (!c.equals("="))
-            	{
-            		calculator.setInput1(Double.valueOf(textfield.getText()));      		
-            		operator = calculator.getOperators().stream().filter(op -> op.getSymbol().equals(c)).findFirst().get();
-            		textfield.setText("");
-            	}
-            	else
-            	{
-            		if (!operator.isUnary())
-            		{
-            			calculator.setInput2(Double.valueOf(textfield.getText()));
-            		}
-            		
-            		operator.getCallback().accept(calculator);
-            		textfield.setText(String.valueOf(calculator.getAnswer()));
-            	}
+        		calculator.setInput1(Double.valueOf(textfield.getText()));      		
+        		operator = calculator.getOperators().stream().filter(op -> op.getSymbol().equals(c)).findFirst().get();
+        		textfield.setText("");
         	}
-        	else if (Character.isDigit(c.charAt(0)))
+        	else
         	{
-        		textfield.setText(Double.valueOf(textfield.getText() + c).toString());
+        		// Store the current textfield input, call the oeprator function, and display the result in the textfield
+        		
+        		// Trig operators are unary functions
+        		if (!operator.isUnary())
+        		{
+        			calculator.setInput2(Double.valueOf(textfield.getText()));
+        		}
+        		
+        		operator.getCallback().accept(calculator);
+        		textfield.setText(String.valueOf(calculator.getAnswer()));
         	}
         }
-    }
+   }
 }
