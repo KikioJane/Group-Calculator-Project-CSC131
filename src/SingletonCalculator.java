@@ -4,27 +4,32 @@ import java.awt.event.*;
 
 public class SingletonCalculator 
 {
-	// create a single instance
-	
+	// create a single instance	
+
 	private static SingletonCalculator instance = new SingletonCalculator();
 	
 	//private constructor
 	
 	private SingletonCalculator()
 	{
+		AbstractCalculator calculator = new Trig(new CalculatorBase());
+		
+		
 		JTextField calcentr;
       		JFrame frm = new JFrame();
 		Container contentPane = frm.getContentPane();
       		JButton B = new JButton();
-      		ActionListener AL = new CalcActionListener(B);
+      		
 		contentPane.setLayout(new GridLayout(7,1,2,2));
 		
 		JLabel calcnm = new JLabel("SAHO Calculator",JLabel.CENTER);
 		frm.getContentPane().add(calcnm);
 		
-		calcentr = new JTextField("0.");
+		calcentr = new JTextField("0");
 		calcentr.setHorizontalAlignment(JTextField.RIGHT);
 		frm.getContentPane().add(calcentr);
+		
+		ActionListener AL = new CalcActionListener(calcentr, calculator);
 		
 		JPanel r1 = new JPanel();								//Start row 1
 		r1.setLayout(new GridLayout(1,4,2,2));
@@ -36,7 +41,7 @@ public class SingletonCalculator
 		}
 		r1.add(B = new JButton ("+"));
 		
-		// B.addActionListener(AL);
+		B.addActionListener(AL);
 		JPanel r2 = new JPanel();								//Start row 2
 		r2.setLayout(new GridLayout(1,4,2,2));
 		frm.getContentPane().add(r2);

@@ -19,5 +19,9 @@ public class Operator {
 		return callback;
 	}
 	
+	public String toString()
+	{
+		return symbol;
+	}
 	
 }
