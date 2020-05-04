@@ -31,7 +31,11 @@ public class CalcActionListener implements ActionListener
         	// Any other key with the exception of equals sets the current textfield value as input and stores the operator
         	if (!c.equals("="))
         	{
-        		calculator.setInput1(Double.valueOf(textfield.getText()));      		
+        		if (!textfield.getText().isEmpty())
+        		{
+        			calculator.setInput1(Double.valueOf(textfield.getText()));      		
+        		}
+        		
         		operator = calculator.getOperators().stream().filter(op -> op.getSymbol().equals(c)).findFirst().get();
         		textfield.setText("");
         	}
