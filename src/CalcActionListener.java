@@ -34,7 +34,11 @@ public class CalcActionListener implements ActionListener
             	}
             	else
             	{
-            		calculator.setInput2(Double.valueOf(textfield.getText()));
+            		if (!operator.isUnary())
+            		{
+            			calculator.setInput2(Double.valueOf(textfield.getText()));
+            		}
+            		
             		operator.getCallback().accept(calculator);
             		textfield.setText(String.valueOf(calculator.getAnswer()));
             	}

@@ -36,7 +36,7 @@ public class CalculatorBase implements AbstractCalculator
 
 	public void setInput1(double input1)
 	{
-		this.input1 = input1;		sets input1 to current input
+		this.input1 = input1;		// sets input1 to current input
 	}
 
 
