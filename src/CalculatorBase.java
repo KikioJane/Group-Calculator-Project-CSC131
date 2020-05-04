@@ -16,7 +16,7 @@ public class CalculatorBase implements AbstractCalculator
 		answer = 0;
 		operators = new LinkedList<Operator>();							// creates linked list
 		
-		operators.add(new Operator("Clear", (calc) ->{ clear();}));		// creates clear operator
+		operators.add(new Operator("C", (calc) ->{ clear();}));		// creates clear operator
 		operators.add(new Operator("+", (calc) -> {  add(); }));		// creates add operator
 		operators.add(new Operator("-", (calc) -> {  subtract(); }));	// creates subtract operator
 		operators.add(new Operator("/", (calc) -> {  divide(); }));		// creates divide calculator
