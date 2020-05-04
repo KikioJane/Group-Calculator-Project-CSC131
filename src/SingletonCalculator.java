@@ -12,19 +12,19 @@ public class SingletonCalculator
 	
 	private SingletonCalculator()
 	{
-		JTextField calcentr;
+		//JTextField calcentr;
       		JFrame frm = new JFrame();
 		Container contentPane = frm.getContentPane();
       		JButton B = new JButton();
-      		ActionListener AL = new CalcActionListener(B);
+      		CalcActionListener AL = new CalcActionListener(B);
 		contentPane.setLayout(new GridLayout(7,1,2,2));
 		
 		JLabel calcnm = new JLabel("SAHO Calculator",JLabel.CENTER);
 		frm.getContentPane().add(calcnm);
 		
-		calcentr = new JTextField("0.");
-		calcentr.setHorizontalAlignment(JTextField.RIGHT);
-		frm.getContentPane().add(calcentr);
+		AL.display = new JTextField("0.");
+		AL.display.setHorizontalAlignment(JTextField.RIGHT);
+		frm.getContentPane().add(AL.display);
 		
 		JPanel r1 = new JPanel();								//Start row 1
 		r1.setLayout(new GridLayout(1,4,2,2));
@@ -35,8 +35,8 @@ public class SingletonCalculator
 			B.addActionListener(AL);
 		}
 		r1.add(B = new JButton ("+"));
+		B.addActionListener(AL);
 		
-		// B.addActionListener(AL);
 		JPanel r2 = new JPanel();								//Start row 2
 		r2.setLayout(new GridLayout(1,4,2,2));
 		frm.getContentPane().add(r2);
