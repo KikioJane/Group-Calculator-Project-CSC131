@@ -4,6 +4,25 @@ import org.junit.Test;
 
 public class CalculatorBaseTest {
 
+	//Tests for CalculatorBase.java
+	
+	@Test
+	public void input()
+	{
+		CalculatorBase calc = new CalculatorBase();
+		calc.setInput1(5);
+		calc.setInput2(10);
+		calc.setAnswer(15);
+		calc.getInput1();
+		calc.getInput2();
+		calc.getAnswer();
+		
+		
+		assertEquals("getInput1()", 5, calc.getInput1(), 0);
+		assertEquals("getInput2()", 10, calc.getInput2(), 0);
+		assertEquals("getAnswer()", 15, calc.getAnswer(), 0);
+	}
+	
 	@Test
 	public void add() 
 	{
@@ -52,6 +71,18 @@ public class CalculatorBaseTest {
 		assertEquals("multiply()", 30, calc.getAnswer(), .0001);
 	
 	}
+	
+	@Test
+	public void clear()
+	{
+		CalculatorBase calc = new CalculatorBase();
+		calc.clear();
+		calc.getAnswer();
+		
+		assertEquals("clear()", 0, calc.getAnswer(), 0);
+	}
+	
+	//Tests for Trig.java
 	
 	@Test
 	public void sine()
