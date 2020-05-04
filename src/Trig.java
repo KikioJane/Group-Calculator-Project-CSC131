@@ -11,9 +11,9 @@ public class Trig implements AbstractCalculator
 	{
 		this.Calc = Calc;
 		
-		Calc.getOperators().add(new Operator("sine", (calc) -> {  sine(); }));		// creates sine operator
-		Calc.getOperators().add(new Operator("cos", (calc) -> {  cosine(); }));		// creates cosine operator
-		Calc.getOperators().add(new Operator("tan", (calc) -> {  tangent(); }));	// creates tanggent operator
+		Calc.getOperators().add(new Operator("sin", (calc) -> {  sine(); },    true));	// creates sine operator
+		Calc.getOperators().add(new Operator("cos", (calc) -> {  cosine(); },  true));	// creates cosine operator
+		Calc.getOperators().add(new Operator("tan", (calc) -> {  tangent(); }, true));	// creates tanggent operator
 	}
 	
 	public void sine()
