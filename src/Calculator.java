@@ -25,10 +25,10 @@ public class Calculator implements ActionListener {
 			case '6':
 			case '7':
 			case '8':
-			case '9': if (newNumber) {calcentr.setText(""+c); newNumber = false;}
+			case '9': if (newNumber) {calcentr.setText(""+c); newNumber = false;}	// if the input is a number, parse it 
 				else calcentr.setText(calcentr.getText()+c);
 				return;
-			case '+': opnd1 = Double.parseDouble(calcentr.getText());
+			case '+': opnd1 = Double.parseDouble(calcentr.getText());		// parse the strings to evaluate their operator value
 				newNumber = true;
 				operator = '+';
 				return;
